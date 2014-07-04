@@ -1,0 +1,62 @@
+/*
+ * Author : Bhojal Gelda
+ * Purpose: This controller acts as both the Action Controller and the Front Controller 
+ */
+package my.controllers;
+
+import my.beans.MonthlyRowData;
+import my.beans.SingletonFieldDataHolder;
+import my.bo.LoanCalculatorModel;
+import my.views.LoanCalculatorView;
+import my.views.GraphPanel;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.*;
+
+public class MyFrontController implements ActionListener{
+
+	private List<MonthlyRowData> rowList;
+	private LoanCalculatorView view;
+	private LoanCalculatorModel model;
+	private List<Double> remainingBalValues;
+	SingletonFieldDataHolder fieldData = SingletonFieldDataHolder.getInstance();
+	
+	public MyFrontController(){}
+	public MyFrontController(LoanCalculatorView view,LoanCalculatorModel model){
+		this.model=model;
+		this.view=view;
+		// Add the action listener from this class on to the buttons of the view.
+		view.buttonActionListeners(this);
+		
+	}
+	
+	// Calls the computePayment in the model class and return the result to the View.
+	public double computePayment(double loanAmt, double rate, int numPeriods){
+		return LoanCalculatorModel.computePayment(loanAmt, rate, numPeriods);
+	}
+	
+
+	@Override
+	public void actionPerformed(ActionEvent buttonClicked) {
+			//chartData is always calculated(but not displayed) first in case the user clicks the 'Show Graph' button first
+			rowList = LoanCalculatorModel.computeChartData(fieldData.getTfPrincipal(), fieldData.getTfRate(), fieldData.getTfTerm(),fieldData.getMonthlyPayAmt());
+		if(buttonClicked.getActionCommand().equals("Show Chart"))
+		{   
+			if(rowList!=null)
+			view.showData(rowList);
+		}
+		//Supply Remaining Balance Data to Graph Panel and add it to the Main Frame View
+		if(buttonClicked.getActionCommand().equals("Show Graph")){
+			remainingBalValues=new ArrayList<Double>();
+			if(rowList!=null){
+				for(MonthlyRowData m: rowList){
+					remainingBalValues.add(m.getRemainingBalance());
+					System.out.println("Payment Number : "+m.getPaymentNumber()+" Interest :"+m.getInterestAmt()+" Principal :"+m.getPaymentAmt()+" Remaining Balance :"+m.getRemainingBalance());
+				}
+					view.showGraph(new GraphPanel(remainingBalValues));
+			}
+		}
+	}
+	
+}
