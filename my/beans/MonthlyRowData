@@ -1,0 +1,60 @@
+/*
+ * Author : Bhojal Gelda (bxg131830)
+ * 
+ * Purpose: This is a plain old java class / bean which will 
+ * hold the amortization chart data.
+ */
+
+package my.beans;
+
+public class MonthlyRowData {
+
+	private int paymentNumber;
+	private double paymentAmt;
+	private double interestAmt;
+	private double remainingBalance;
+	
+	public MonthlyRowData(){
+	}
+	
+	public MonthlyRowData(int paymentNumber, double paymentAmt,double interestAmt, double remainingBalance){
+		this.paymentNumber=paymentNumber;
+		this.paymentAmt=paymentAmt;
+		this.interestAmt=interestAmt;
+		this.remainingBalance=remainingBalance;
+	}
+
+	public int getPaymentNumber() {
+		return paymentNumber;
+	}
+
+	public void setPaymentNumber(int paymentNumber) {
+		this.paymentNumber = paymentNumber;
+	}
+
+	public double getPaymentAmt() {
+		return paymentAmt;
+	}
+
+	public void setPaymentAmt(double paymentAmt) {
+		this.paymentAmt = paymentAmt;
+	}
+
+	public double getInterestAmt() {
+		return interestAmt;
+	}
+
+	public void setInterestAmt(double interestAmt) {
+		this.interestAmt = interestAmt;
+	}
+
+	public double getRemainingBalance() {
+		return remainingBalance;
+	}
+
+	public void setRemainingBalance(double remainingBalance) {
+		this.remainingBalance = remainingBalance;
+	}
+	
+	
+}
