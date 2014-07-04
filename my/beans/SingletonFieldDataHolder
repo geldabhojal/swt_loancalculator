@@ -1,0 +1,60 @@
+/*
+ * Author : Bhojal Gelda(bxg131830)
+ * Date: 30th November 2013
+ * 
+ * This is a SINGLETON class, which holds the validated data entered by the user
+ * on the View TextFields viz tfPrincipal , tfRate, tfTerm.
+ * 
+ */
+package my.beans;
+
+public class SingletonFieldDataHolder {
+
+	private double tfPrincipal;
+	private double tfRate;
+	private int tfTerm;
+	private double monthlyPayAmt;
+	private static SingletonFieldDataHolder tfh;
+	
+	private SingletonFieldDataHolder(){}
+
+	public static SingletonFieldDataHolder getInstance(){
+		if(tfh==null)
+		tfh = new SingletonFieldDataHolder();
+	return tfh;
+	}
+
+	public double getTfPrincipal() {
+		return tfPrincipal;
+	}
+
+	public void setTfPrincipal(double tfPrincipal) {
+		this.tfPrincipal = tfPrincipal;
+	}
+
+	public double getTfRate() {
+		return tfRate;
+	}
+
+	public void setTfRate(double tfRate) {
+		this.tfRate = tfRate;
+	}
+
+	public int getTfTerm() {
+		return tfTerm;
+	}
+
+	public void setTfTerm(int tfTerm) {
+		this.tfTerm = tfTerm;
+	}
+
+	public double getMonthlyPayAmt() {
+		return monthlyPayAmt;
+	}
+
+	public void setMonthlyPayAmt(double monthlyPayAmt) {
+		this.monthlyPayAmt = monthlyPayAmt;
+	}
+	
+	
+}
